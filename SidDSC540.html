@@ -1,0 +1,5466 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head></head><body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+    
+    
+    
+    
+
+
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h1>DSC540 Project 1<a rel="noopener" class="anchor-link" href="#DSC540-Project-1">&#182;</a></h1>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>DePaul University<br/>
+Ilyas Ustun, PhD<br/>
+Chicago, IL</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[2]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn</span>
+<span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>&#39;0.24.1&#39;</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>These are the packages I used<a rel="noopener" class="anchor-link" href="#These-are-the-packages-I-used">&#182;</a></h3>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h1>DSC540 Project 1<a rel="noopener" class="anchor-link" href="#DSC540-Project-1">&#182;</a></h1>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h2>Rules<a rel="noopener" class="anchor-link" href="#Rules">&#182;</a></h2><ul>
+<li>Do not change the code already present in the notebook.</li>
+<li>Write your code under the corresponding questions where you see <code># Code here</code>. You can use more than one cell, if you&#39;d like.</li>
+<li>Provide explanation in a separate Markdown formatted cell. </li>
+<li>You can change the cell type by:<ul>
+<li>Clicking on the outer area of the cell type you want to change,</li>
+<li>Go to the top, and select either Code or Markdown from the dropdown menu.</li>
+</ul>
+</li>
+<li>Be concise in your explanations and conclusions.</li>
+<li>Write clear code and provide explanation to functions you create by using <code>#</code> comment sign.</li>
+<li>For built-in function and methods you use from libraries, provide a very brief explanation of what they do.</li>
+<li>Try to answer the questions by yourself. Use documentation from pandas, sklearn and similar libraries to solve the problem.</li>
+<li>If you are stuck you can use different resources. Do not find an identical project and copy paste the solutions. </li>
+<li>Write your name before beginning to code.</li>
+</ul>
+<p>Important:</p>
+<ul>
+<li><strong>Do NOT share the solutions with other people.</strong></li>
+<li><strong>Do NOT share the solutions on the internet including but not limited to Github and other platforms.</strong></li>
+<li>Sign the Honor Pledge below indicating that you have agreed to these rules listed here, and any other ethical and honor rules as required by the university.</li>
+</ul>
+<ul>
+<li><strong>Deliverables:</strong><ol>
+<li>The Python Jupyter notebook file named properly with your name. Example: dsc540_project1_john_doe.ipynb</li>
+<li>The HTML output of this code notebook names the same way. Example: dsc540_project1_john_doe.html<ul>
+<li>File -&gt; Download as -&gt; HTML   </li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p>Good Luck!</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>SIDHANT THAKUR<a rel="noopener" class="anchor-link" href="#SIDHANT-THAKUR">&#182;</a></h3>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p><strong>Honor Pledge:</strong><br/>
+I pledge on my honor that I, <strong>Sidhant Thakur</strong>, have followed the rules listed above, that I have not given or received any unauthorized assistance on this assignment.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h2>The Data<a rel="noopener" class="anchor-link" href="#The-Data">&#182;</a></h2>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>In this project, we will be working with the <strong>Breast Cancer Wisconsin dataset</strong>, which
+contains 569 examples of malignant and benign tumor cells.<br/>
+The Breast Cancer Wisconsin dataset can be found in the UCI
+Machine Learning Repository, and more detailed information about this dataset can
+be found at <a rel="noopener" href="https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic">https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic</a>).<br/>
+The first two columns in the dataset store the unique ID numbers of the examples and the corresponding
+diagnoses (M = malignant, B = benign), respectively.<br/>
+Columns 3-32 contain 30 real-valued features that have been computed from digitized images of the cell
+nuclei, which can be used to build a model to predict whether a tumor is benign
+or malignant.</p>
+<p><strong>Variable Information:</strong></p>
+<p>1) ID number
+2) Diagnosis (M = malignant, B = benign)
+3-32)</p>
+<p>Ten real-valued features are computed for each cell nucleus:</p>
+
+<pre><code>a) radius (mean of distances from center to points on the perimeter)
+b) texture (standard deviation of gray-scale values)
+c) perimeter
+d) area
+e) smoothness (local variation in radius lengths)
+f) compactness (perimeter^2 / area - 1.0)
+g) concavity (severity of concave portions of the contour)
+h) concave points (number of concave portions of the contour)
+i) symmetry 
+j) fractal dimension (&quot;coastline approximation&quot; - 1)
+
+
+</code></pre>
+<p>The mean, standard error, and &quot;worst&quot; or largest (mean of the three
+largest values) of these features were computed for each image,
+resulting in 30 features.  For instance, field 3 is Mean Radius, field
+13 is Radius SE, field 23 is Worst Radius.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>Load the dataset<a rel="noopener" class="anchor-link" href="#Load-the-dataset">&#182;</a></h3>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<ul>
+<li>Since the dataset at the UCI repository does not have headers, we will read the data from the hard drive which I have modified.</li>
+<li>Last column is the target column.</li>
+<li>The ID column is already dropped.</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;wdbc.data&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult">
+<div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+      <th>13</th>
+      <th>14</th>
+      <th>15</th>
+      <th>16</th>
+      <th>17</th>
+      <th>18</th>
+      <th>19</th>
+      <th>20</th>
+      <th>21</th>
+      <th>22</th>
+      <th>23</th>
+      <th>24</th>
+      <th>25</th>
+      <th>26</th>
+      <th>27</th>
+      <th>28</th>
+      <th>29</th>
+      <th>30</th>
+      <th>31</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>842302</td>
+      <td>M</td>
+      <td>17.99</td>
+      <td>10.38</td>
+      <td>122.80</td>
+      <td>1001.0</td>
+      <td>0.11840</td>
+      <td>0.27760</td>
+      <td>0.30010</td>
+      <td>0.14710</td>
+      <td>0.2419</td>
+      <td>0.07871</td>
+      <td>1.0950</td>
+      <td>0.9053</td>
+      <td>8.589</td>
+      <td>153.40</td>
+      <td>0.006399</td>
+      <td>0.04904</td>
+      <td>0.05373</td>
+      <td>0.01587</td>
+      <td>0.03003</td>
+      <td>0.006193</td>
+      <td>25.380</td>
+      <td>17.33</td>
+      <td>184.60</td>
+      <td>2019.0</td>
+      <td>0.16220</td>
+      <td>0.66560</td>
+      <td>0.7119</td>
+      <td>0.2654</td>
+      <td>0.4601</td>
+      <td>0.11890</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>842517</td>
+      <td>M</td>
+      <td>20.57</td>
+      <td>17.77</td>
+      <td>132.90</td>
+      <td>1326.0</td>
+      <td>0.08474</td>
+      <td>0.07864</td>
+      <td>0.08690</td>
+      <td>0.07017</td>
+      <td>0.1812</td>
+      <td>0.05667</td>
+      <td>0.5435</td>
+      <td>0.7339</td>
+      <td>3.398</td>
+      <td>74.08</td>
+      <td>0.005225</td>
+      <td>0.01308</td>
+      <td>0.01860</td>
+      <td>0.01340</td>
+      <td>0.01389</td>
+      <td>0.003532</td>
+      <td>24.990</td>
+      <td>23.41</td>
+      <td>158.80</td>
+      <td>1956.0</td>
+      <td>0.12380</td>
+      <td>0.18660</td>
+      <td>0.2416</td>
+      <td>0.1860</td>
+      <td>0.2750</td>
+      <td>0.08902</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>84300903</td>
+      <td>M</td>
+      <td>19.69</td>
+      <td>21.25</td>
+      <td>130.00</td>
+      <td>1203.0</td>
+      <td>0.10960</td>
+      <td>0.15990</td>
+      <td>0.19740</td>
+      <td>0.12790</td>
+      <td>0.2069</td>
+      <td>0.05999</td>
+      <td>0.7456</td>
+      <td>0.7869</td>
+      <td>4.585</td>
+      <td>94.03</td>
+      <td>0.006150</td>
+      <td>0.04006</td>
+      <td>0.03832</td>
+      <td>0.02058</td>
+      <td>0.02250</td>
+      <td>0.004571</td>
+      <td>23.570</td>
+      <td>25.53</td>
+      <td>152.50</td>
+      <td>1709.0</td>
+      <td>0.14440</td>
+      <td>0.42450</td>
+      <td>0.4504</td>
+      <td>0.2430</td>
+      <td>0.3613</td>
+      <td>0.08758</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>84348301</td>
+      <td>M</td>
+      <td>11.42</td>
+      <td>20.38</td>
+      <td>77.58</td>
+      <td>386.1</td>
+      <td>0.14250</td>
+      <td>0.28390</td>
+      <td>0.24140</td>
+      <td>0.10520</td>
+      <td>0.2597</td>
+      <td>0.09744</td>
+      <td>0.4956</td>
+      <td>1.1560</td>
+      <td>3.445</td>
+      <td>27.23</td>
+      <td>0.009110</td>
+      <td>0.07458</td>
+      <td>0.05661</td>
+      <td>0.01867</td>
+      <td>0.05963</td>
+      <td>0.009208</td>
+      <td>14.910</td>
+      <td>26.50</td>
+      <td>98.87</td>
+      <td>567.7</td>
+      <td>0.20980</td>
+      <td>0.86630</td>
+      <td>0.6869</td>
+      <td>0.2575</td>
+      <td>0.6638</td>
+      <td>0.17300</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>84358402</td>
+      <td>M</td>
+      <td>20.29</td>
+      <td>14.34</td>
+      <td>135.10</td>
+      <td>1297.0</td>
+      <td>0.10030</td>
+      <td>0.13280</td>
+      <td>0.19800</td>
+      <td>0.10430</td>
+      <td>0.1809</td>
+      <td>0.05883</td>
+      <td>0.7572</td>
+      <td>0.7813</td>
+      <td>5.438</td>
+      <td>94.44</td>
+      <td>0.011490</td>
+      <td>0.02461</td>
+      <td>0.05688</td>
+      <td>0.01885</td>
+      <td>0.01756</td>
+      <td>0.005115</td>
+      <td>22.540</td>
+      <td>16.67</td>
+      <td>152.20</td>
+      <td>1575.0</td>
+      <td>0.13740</td>
+      <td>0.20500</td>
+      <td>0.4000</td>
+      <td>0.1625</td>
+      <td>0.2364</td>
+      <td>0.07678</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>564</th>
+      <td>926424</td>
+      <td>M</td>
+      <td>21.56</td>
+      <td>22.39</td>
+      <td>142.00</td>
+      <td>1479.0</td>
+      <td>0.11100</td>
+      <td>0.11590</td>
+      <td>0.24390</td>
+      <td>0.13890</td>
+      <td>0.1726</td>
+      <td>0.05623</td>
+      <td>1.1760</td>
+      <td>1.2560</td>
+      <td>7.673</td>
+      <td>158.70</td>
+      <td>0.010300</td>
+      <td>0.02891</td>
+      <td>0.05198</td>
+      <td>0.02454</td>
+      <td>0.01114</td>
+      <td>0.004239</td>
+      <td>25.450</td>
+      <td>26.40</td>
+      <td>166.10</td>
+      <td>2027.0</td>
+      <td>0.14100</td>
+      <td>0.21130</td>
+      <td>0.4107</td>
+      <td>0.2216</td>
+      <td>0.2060</td>
+      <td>0.07115</td>
+    </tr>
+    <tr>
+      <th>565</th>
+      <td>926682</td>
+      <td>M</td>
+      <td>20.13</td>
+      <td>28.25</td>
+      <td>131.20</td>
+      <td>1261.0</td>
+      <td>0.09780</td>
+      <td>0.10340</td>
+      <td>0.14400</td>
+      <td>0.09791</td>
+      <td>0.1752</td>
+      <td>0.05533</td>
+      <td>0.7655</td>
+      <td>2.4630</td>
+      <td>5.203</td>
+      <td>99.04</td>
+      <td>0.005769</td>
+      <td>0.02423</td>
+      <td>0.03950</td>
+      <td>0.01678</td>
+      <td>0.01898</td>
+      <td>0.002498</td>
+      <td>23.690</td>
+      <td>38.25</td>
+      <td>155.00</td>
+      <td>1731.0</td>
+      <td>0.11660</td>
+      <td>0.19220</td>
+      <td>0.3215</td>
+      <td>0.1628</td>
+      <td>0.2572</td>
+      <td>0.06637</td>
+    </tr>
+    <tr>
+      <th>566</th>
+      <td>926954</td>
+      <td>M</td>
+      <td>16.60</td>
+      <td>28.08</td>
+      <td>108.30</td>
+      <td>858.1</td>
+      <td>0.08455</td>
+      <td>0.10230</td>
+      <td>0.09251</td>
+      <td>0.05302</td>
+      <td>0.1590</td>
+      <td>0.05648</td>
+      <td>0.4564</td>
+      <td>1.0750</td>
+      <td>3.425</td>
+      <td>48.55</td>
+      <td>0.005903</td>
+      <td>0.03731</td>
+      <td>0.04730</td>
+      <td>0.01557</td>
+      <td>0.01318</td>
+      <td>0.003892</td>
+      <td>18.980</td>
+      <td>34.12</td>
+      <td>126.70</td>
+      <td>1124.0</td>
+      <td>0.11390</td>
+      <td>0.30940</td>
+      <td>0.3403</td>
+      <td>0.1418</td>
+      <td>0.2218</td>
+      <td>0.07820</td>
+    </tr>
+    <tr>
+      <th>567</th>
+      <td>927241</td>
+      <td>M</td>
+      <td>20.60</td>
+      <td>29.33</td>
+      <td>140.10</td>
+      <td>1265.0</td>
+      <td>0.11780</td>
+      <td>0.27700</td>
+      <td>0.35140</td>
+      <td>0.15200</td>
+      <td>0.2397</td>
+      <td>0.07016</td>
+      <td>0.7260</td>
+      <td>1.5950</td>
+      <td>5.772</td>
+      <td>86.22</td>
+      <td>0.006522</td>
+      <td>0.06158</td>
+      <td>0.07117</td>
+      <td>0.01664</td>
+      <td>0.02324</td>
+      <td>0.006185</td>
+      <td>25.740</td>
+      <td>39.42</td>
+      <td>184.60</td>
+      <td>1821.0</td>
+      <td>0.16500</td>
+      <td>0.86810</td>
+      <td>0.9387</td>
+      <td>0.2650</td>
+      <td>0.4087</td>
+      <td>0.12400</td>
+    </tr>
+    <tr>
+      <th>568</th>
+      <td>92751</td>
+      <td>B</td>
+      <td>7.76</td>
+      <td>24.54</td>
+      <td>47.92</td>
+      <td>181.0</td>
+      <td>0.05263</td>
+      <td>0.04362</td>
+      <td>0.00000</td>
+      <td>0.00000</td>
+      <td>0.1587</td>
+      <td>0.05884</td>
+      <td>0.3857</td>
+      <td>1.4280</td>
+      <td>2.548</td>
+      <td>19.15</td>
+      <td>0.007189</td>
+      <td>0.00466</td>
+      <td>0.00000</td>
+      <td>0.00000</td>
+      <td>0.02676</td>
+      <td>0.002783</td>
+      <td>9.456</td>
+      <td>30.37</td>
+      <td>59.16</td>
+      <td>268.6</td>
+      <td>0.08996</td>
+      <td>0.06444</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.2871</td>
+      <td>0.07039</td>
+    </tr>
+  </tbody>
+</table>
+<p>569 rows &#215; 32 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;diagnosis&#39;</span><span class="p">,</span> <span class="s1">&#39;mean radius&#39;</span><span class="p">,</span> <span class="s1">&#39;mean texture&#39;</span><span class="p">,</span> <span class="s1">&#39;mean perimeter&#39;</span><span class="p">,</span> <span class="s1">&#39;mean area&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;mean smoothness&#39;</span><span class="p">,</span> <span class="s1">&#39;mean compactness&#39;</span><span class="p">,</span> <span class="s1">&#39;mean concavity&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;mean concave points&#39;</span><span class="p">,</span> <span class="s1">&#39;mean symmetry&#39;</span><span class="p">,</span> <span class="s1">&#39;mean fractal dimension&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;radius error&#39;</span><span class="p">,</span> <span class="s1">&#39;texture error&#39;</span><span class="p">,</span> <span class="s1">&#39;perimeter error&#39;</span><span class="p">,</span> <span class="s1">&#39;area error&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;smoothness error&#39;</span><span class="p">,</span> <span class="s1">&#39;compactness error&#39;</span><span class="p">,</span> <span class="s1">&#39;concavity error&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;concave points error&#39;</span><span class="p">,</span> <span class="s1">&#39;symmetry error&#39;</span><span class="p">,</span> <span class="s1">&#39;fractal dimension error&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;worst radius&#39;</span><span class="p">,</span> <span class="s1">&#39;worst texture&#39;</span><span class="p">,</span> <span class="s1">&#39;worst perimeter&#39;</span><span class="p">,</span> <span class="s1">&#39;worst area&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;worst smoothness&#39;</span><span class="p">,</span> <span class="s1">&#39;worst compactness&#39;</span><span class="p">,</span> <span class="s1">&#39;worst concavity&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;worst concave points&#39;</span><span class="p">,</span> <span class="s1">&#39;worst symmetry&#39;</span><span class="p">,</span> <span class="s1">&#39;worst fractal dimension&#39;</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult">
+<div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>diagnosis</th>
+      <th>mean radius</th>
+      <th>mean texture</th>
+      <th>mean perimeter</th>
+      <th>mean area</th>
+      <th>mean smoothness</th>
+      <th>mean compactness</th>
+      <th>mean concavity</th>
+      <th>mean concave points</th>
+      <th>mean symmetry</th>
+      <th>mean fractal dimension</th>
+      <th>radius error</th>
+      <th>texture error</th>
+      <th>perimeter error</th>
+      <th>area error</th>
+      <th>smoothness error</th>
+      <th>compactness error</th>
+      <th>concavity error</th>
+      <th>concave points error</th>
+      <th>symmetry error</th>
+      <th>fractal dimension error</th>
+      <th>worst radius</th>
+      <th>worst texture</th>
+      <th>worst perimeter</th>
+      <th>worst area</th>
+      <th>worst smoothness</th>
+      <th>worst compactness</th>
+      <th>worst concavity</th>
+      <th>worst concave points</th>
+      <th>worst symmetry</th>
+      <th>worst fractal dimension</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>842302</td>
+      <td>M</td>
+      <td>17.99</td>
+      <td>10.38</td>
+      <td>122.80</td>
+      <td>1001.0</td>
+      <td>0.11840</td>
+      <td>0.27760</td>
+      <td>0.3001</td>
+      <td>0.14710</td>
+      <td>0.2419</td>
+      <td>0.07871</td>
+      <td>1.0950</td>
+      <td>0.9053</td>
+      <td>8.589</td>
+      <td>153.40</td>
+      <td>0.006399</td>
+      <td>0.04904</td>
+      <td>0.05373</td>
+      <td>0.01587</td>
+      <td>0.03003</td>
+      <td>0.006193</td>
+      <td>25.38</td>
+      <td>17.33</td>
+      <td>184.60</td>
+      <td>2019.0</td>
+      <td>0.1622</td>
+      <td>0.6656</td>
+      <td>0.7119</td>
+      <td>0.2654</td>
+      <td>0.4601</td>
+      <td>0.11890</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>842517</td>
+      <td>M</td>
+      <td>20.57</td>
+      <td>17.77</td>
+      <td>132.90</td>
+      <td>1326.0</td>
+      <td>0.08474</td>
+      <td>0.07864</td>
+      <td>0.0869</td>
+      <td>0.07017</td>
+      <td>0.1812</td>
+      <td>0.05667</td>
+      <td>0.5435</td>
+      <td>0.7339</td>
+      <td>3.398</td>
+      <td>74.08</td>
+      <td>0.005225</td>
+      <td>0.01308</td>
+      <td>0.01860</td>
+      <td>0.01340</td>
+      <td>0.01389</td>
+      <td>0.003532</td>
+      <td>24.99</td>
+      <td>23.41</td>
+      <td>158.80</td>
+      <td>1956.0</td>
+      <td>0.1238</td>
+      <td>0.1866</td>
+      <td>0.2416</td>
+      <td>0.1860</td>
+      <td>0.2750</td>
+      <td>0.08902</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>84300903</td>
+      <td>M</td>
+      <td>19.69</td>
+      <td>21.25</td>
+      <td>130.00</td>
+      <td>1203.0</td>
+      <td>0.10960</td>
+      <td>0.15990</td>
+      <td>0.1974</td>
+      <td>0.12790</td>
+      <td>0.2069</td>
+      <td>0.05999</td>
+      <td>0.7456</td>
+      <td>0.7869</td>
+      <td>4.585</td>
+      <td>94.03</td>
+      <td>0.006150</td>
+      <td>0.04006</td>
+      <td>0.03832</td>
+      <td>0.02058</td>
+      <td>0.02250</td>
+      <td>0.004571</td>
+      <td>23.57</td>
+      <td>25.53</td>
+      <td>152.50</td>
+      <td>1709.0</td>
+      <td>0.1444</td>
+      <td>0.4245</td>
+      <td>0.4504</td>
+      <td>0.2430</td>
+      <td>0.3613</td>
+      <td>0.08758</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>84348301</td>
+      <td>M</td>
+      <td>11.42</td>
+      <td>20.38</td>
+      <td>77.58</td>
+      <td>386.1</td>
+      <td>0.14250</td>
+      <td>0.28390</td>
+      <td>0.2414</td>
+      <td>0.10520</td>
+      <td>0.2597</td>
+      <td>0.09744</td>
+      <td>0.4956</td>
+      <td>1.1560</td>
+      <td>3.445</td>
+      <td>27.23</td>
+      <td>0.009110</td>
+      <td>0.07458</td>
+      <td>0.05661</td>
+      <td>0.01867</td>
+      <td>0.05963</td>
+      <td>0.009208</td>
+      <td>14.91</td>
+      <td>26.50</td>
+      <td>98.87</td>
+      <td>567.7</td>
+      <td>0.2098</td>
+      <td>0.8663</td>
+      <td>0.6869</td>
+      <td>0.2575</td>
+      <td>0.6638</td>
+      <td>0.17300</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>84358402</td>
+      <td>M</td>
+      <td>20.29</td>
+      <td>14.34</td>
+      <td>135.10</td>
+      <td>1297.0</td>
+      <td>0.10030</td>
+      <td>0.13280</td>
+      <td>0.1980</td>
+      <td>0.10430</td>
+      <td>0.1809</td>
+      <td>0.05883</td>
+      <td>0.7572</td>
+      <td>0.7813</td>
+      <td>5.438</td>
+      <td>94.44</td>
+      <td>0.011490</td>
+      <td>0.02461</td>
+      <td>0.05688</td>
+      <td>0.01885</td>
+      <td>0.01756</td>
+      <td>0.005115</td>
+      <td>22.54</td>
+      <td>16.67</td>
+      <td>152.20</td>
+      <td>1575.0</td>
+      <td>0.1374</td>
+      <td>0.2050</td>
+      <td>0.4000</td>
+      <td>0.1625</td>
+      <td>0.2364</td>
+      <td>0.07678</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;diagnosis&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult">
+<div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean radius</th>
+      <th>mean texture</th>
+      <th>mean perimeter</th>
+      <th>mean area</th>
+      <th>mean smoothness</th>
+      <th>mean compactness</th>
+      <th>mean concavity</th>
+      <th>mean concave points</th>
+      <th>mean symmetry</th>
+      <th>mean fractal dimension</th>
+      <th>radius error</th>
+      <th>texture error</th>
+      <th>perimeter error</th>
+      <th>area error</th>
+      <th>smoothness error</th>
+      <th>compactness error</th>
+      <th>concavity error</th>
+      <th>concave points error</th>
+      <th>symmetry error</th>
+      <th>fractal dimension error</th>
+      <th>worst radius</th>
+      <th>worst texture</th>
+      <th>worst perimeter</th>
+      <th>worst area</th>
+      <th>worst smoothness</th>
+      <th>worst compactness</th>
+      <th>worst concavity</th>
+      <th>worst concave points</th>
+      <th>worst symmetry</th>
+      <th>worst fractal dimension</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>17.99</td>
+      <td>10.38</td>
+      <td>122.80</td>
+      <td>1001.0</td>
+      <td>0.11840</td>
+      <td>0.27760</td>
+      <td>0.3001</td>
+      <td>0.14710</td>
+      <td>0.2419</td>
+      <td>0.07871</td>
+      <td>1.0950</td>
+      <td>0.9053</td>
+      <td>8.589</td>
+      <td>153.40</td>
+      <td>0.006399</td>
+      <td>0.04904</td>
+      <td>0.05373</td>
+      <td>0.01587</td>
+      <td>0.03003</td>
+      <td>0.006193</td>
+      <td>25.38</td>
+      <td>17.33</td>
+      <td>184.60</td>
+      <td>2019.0</td>
+      <td>0.1622</td>
+      <td>0.6656</td>
+      <td>0.7119</td>
+      <td>0.2654</td>
+      <td>0.4601</td>
+      <td>0.11890</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>20.57</td>
+      <td>17.77</td>
+      <td>132.90</td>
+      <td>1326.0</td>
+      <td>0.08474</td>
+      <td>0.07864</td>
+      <td>0.0869</td>
+      <td>0.07017</td>
+      <td>0.1812</td>
+      <td>0.05667</td>
+      <td>0.5435</td>
+      <td>0.7339</td>
+      <td>3.398</td>
+      <td>74.08</td>
+      <td>0.005225</td>
+      <td>0.01308</td>
+      <td>0.01860</td>
+      <td>0.01340</td>
+      <td>0.01389</td>
+      <td>0.003532</td>
+      <td>24.99</td>
+      <td>23.41</td>
+      <td>158.80</td>
+      <td>1956.0</td>
+      <td>0.1238</td>
+      <td>0.1866</td>
+      <td>0.2416</td>
+      <td>0.1860</td>
+      <td>0.2750</td>
+      <td>0.08902</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>19.69</td>
+      <td>21.25</td>
+      <td>130.00</td>
+      <td>1203.0</td>
+      <td>0.10960</td>
+      <td>0.15990</td>
+      <td>0.1974</td>
+      <td>0.12790</td>
+      <td>0.2069</td>
+      <td>0.05999</td>
+      <td>0.7456</td>
+      <td>0.7869</td>
+      <td>4.585</td>
+      <td>94.03</td>
+      <td>0.006150</td>
+      <td>0.04006</td>
+      <td>0.03832</td>
+      <td>0.02058</td>
+      <td>0.02250</td>
+      <td>0.004571</td>
+      <td>23.57</td>
+      <td>25.53</td>
+      <td>152.50</td>
+      <td>1709.0</td>
+      <td>0.1444</td>
+      <td>0.4245</td>
+      <td>0.4504</td>
+      <td>0.2430</td>
+      <td>0.3613</td>
+      <td>0.08758</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11.42</td>
+      <td>20.38</td>
+      <td>77.58</td>
+      <td>386.1</td>
+      <td>0.14250</td>
+      <td>0.28390</td>
+      <td>0.2414</td>
+      <td>0.10520</td>
+      <td>0.2597</td>
+      <td>0.09744</td>
+      <td>0.4956</td>
+      <td>1.1560</td>
+      <td>3.445</td>
+      <td>27.23</td>
+      <td>0.009110</td>
+      <td>0.07458</td>
+      <td>0.05661</td>
+      <td>0.01867</td>
+      <td>0.05963</td>
+      <td>0.009208</td>
+      <td>14.91</td>
+      <td>26.50</td>
+      <td>98.87</td>
+      <td>567.7</td>
+      <td>0.2098</td>
+      <td>0.8663</td>
+      <td>0.6869</td>
+      <td>0.2575</td>
+      <td>0.6638</td>
+      <td>0.17300</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>20.29</td>
+      <td>14.34</td>
+      <td>135.10</td>
+      <td>1297.0</td>
+      <td>0.10030</td>
+      <td>0.13280</td>
+      <td>0.1980</td>
+      <td>0.10430</td>
+      <td>0.1809</td>
+      <td>0.05883</td>
+      <td>0.7572</td>
+      <td>0.7813</td>
+      <td>5.438</td>
+      <td>94.44</td>
+      <td>0.011490</td>
+      <td>0.02461</td>
+      <td>0.05688</td>
+      <td>0.01885</td>
+      <td>0.01756</td>
+      <td>0.005115</td>
+      <td>22.54</td>
+      <td>16.67</td>
+      <td>152.20</td>
+      <td>1575.0</td>
+      <td>0.1374</td>
+      <td>0.2050</td>
+      <td>0.4000</td>
+      <td>0.1625</td>
+      <td>0.2364</td>
+      <td>0.07678</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>The target vector is <code>y</code>.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">diagnosis</span>
+<span class="n">y</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>0    M
+1    M
+2    M
+3    M
+4    M
+Name: diagnosis, dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>Question 1 [10 points]<a rel="noopener" class="anchor-link" href="#Question-1-[10-points]">&#182;</a></h3><p>How many people have cancer?</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<blockquote><p>Hint: Should be less than 300!</p>
+</blockquote>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;diagnosis&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>212</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>212 people have malignant cancer.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>Check the feature set <code>X</code> and investigate the column types. Is there any categorical data? Any missing values? 
+How many observations? How many variables are there in the feature set (<code>X</code>)?</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># info allows you to print dataframe information such as the number of columns, datatype, and column label.</span>
+<span class="n">X</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 569 entries, 0 to 568
+Data columns (total 30 columns):
+ #   Column                   Non-Null Count  Dtype  
+---  ------                   --------------  -----  
+ 0   mean radius              569 non-null    float64
+ 1   mean texture             569 non-null    float64
+ 2   mean perimeter           569 non-null    float64
+ 3   mean area                569 non-null    float64
+ 4   mean smoothness          569 non-null    float64
+ 5   mean compactness         569 non-null    float64
+ 6   mean concavity           569 non-null    float64
+ 7   mean concave points      569 non-null    float64
+ 8   mean symmetry            569 non-null    float64
+ 9   mean fractal dimension   569 non-null    float64
+ 10  radius error             569 non-null    float64
+ 11  texture error            569 non-null    float64
+ 12  perimeter error          569 non-null    float64
+ 13  area error               569 non-null    float64
+ 14  smoothness error         569 non-null    float64
+ 15  compactness error        569 non-null    float64
+ 16  concavity error          569 non-null    float64
+ 17  concave points error     569 non-null    float64
+ 18  symmetry error           569 non-null    float64
+ 19  fractal dimension error  569 non-null    float64
+ 20  worst radius             569 non-null    float64
+ 21  worst texture            569 non-null    float64
+ 22  worst perimeter          569 non-null    float64
+ 23  worst area               569 non-null    float64
+ 24  worst smoothness         569 non-null    float64
+ 25  worst compactness        569 non-null    float64
+ 26  worst concavity          569 non-null    float64
+ 27  worst concave points     569 non-null    float64
+ 28  worst symmetry           569 non-null    float64
+ 29  worst fractal dimension  569 non-null    float64
+dtypes: float64(30)
+memory usage: 133.5 KB
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># isnull().sum count the missing value in dataframe.</span>
+<span class="n">X</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>mean radius                0
+mean texture               0
+mean perimeter             0
+mean area                  0
+mean smoothness            0
+mean compactness           0
+mean concavity             0
+mean concave points        0
+mean symmetry              0
+mean fractal dimension     0
+radius error               0
+texture error              0
+perimeter error            0
+area error                 0
+smoothness error           0
+compactness error          0
+concavity error            0
+concave points error       0
+symmetry error             0
+fractal dimension error    0
+worst radius               0
+worst texture              0
+worst perimeter            0
+worst area                 0
+worst smoothness           0
+worst compactness          0
+worst concavity            0
+worst concave points       0
+worst symmetry             0
+worst fractal dimension    0
+dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<ul>
+<li>No missing values. </li>
+<li>No categorical variables. </li>
+<li>569 observations, 30 columns.</li>
+</ul>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>Question 2 [5 points]<a rel="noopener" class="anchor-link" href="#Question-2-[5-points]">&#182;</a></h3><ul>
+<li>Check the statistical summary of numeric features. Do the variables have values close to each other, or is there large differences?</li>
+<li>Among the <code>mean</code> (the first 10) features, which one has the minimum 25% percentile value? </li>
+<li>Which <code>mean</code> variable (the first 10 features) has the largest mean value?</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[15]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># returns description of the data in the DataFrame such as count, mean, standard deviation,min, max</span>
+<span class="n">X</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult">
+<div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean radius</th>
+      <th>mean texture</th>
+      <th>mean perimeter</th>
+      <th>mean area</th>
+      <th>mean smoothness</th>
+      <th>mean compactness</th>
+      <th>mean concavity</th>
+      <th>mean concave points</th>
+      <th>mean symmetry</th>
+      <th>mean fractal dimension</th>
+      <th>radius error</th>
+      <th>texture error</th>
+      <th>perimeter error</th>
+      <th>area error</th>
+      <th>smoothness error</th>
+      <th>compactness error</th>
+      <th>concavity error</th>
+      <th>concave points error</th>
+      <th>symmetry error</th>
+      <th>fractal dimension error</th>
+      <th>worst radius</th>
+      <th>worst texture</th>
+      <th>worst perimeter</th>
+      <th>worst area</th>
+      <th>worst smoothness</th>
+      <th>worst compactness</th>
+      <th>worst concavity</th>
+      <th>worst concave points</th>
+      <th>worst symmetry</th>
+      <th>worst fractal dimension</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+      <td>569.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>14.127292</td>
+      <td>19.289649</td>
+      <td>91.969033</td>
+      <td>654.889104</td>
+      <td>0.096360</td>
+      <td>0.104341</td>
+      <td>0.088799</td>
+      <td>0.048919</td>
+      <td>0.181162</td>
+      <td>0.062798</td>
+      <td>0.405172</td>
+      <td>1.216853</td>
+      <td>2.866059</td>
+      <td>40.337079</td>
+      <td>0.007041</td>
+      <td>0.025478</td>
+      <td>0.031894</td>
+      <td>0.011796</td>
+      <td>0.020542</td>
+      <td>0.003795</td>
+      <td>16.269190</td>
+      <td>25.677223</td>
+      <td>107.261213</td>
+      <td>880.583128</td>
+      <td>0.132369</td>
+      <td>0.254265</td>
+      <td>0.272188</td>
+      <td>0.114606</td>
+      <td>0.290076</td>
+      <td>0.083946</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>3.524049</td>
+      <td>4.301036</td>
+      <td>24.298981</td>
+      <td>351.914129</td>
+      <td>0.014064</td>
+      <td>0.052813</td>
+      <td>0.079720</td>
+      <td>0.038803</td>
+      <td>0.027414</td>
+      <td>0.007060</td>
+      <td>0.277313</td>
+      <td>0.551648</td>
+      <td>2.021855</td>
+      <td>45.491006</td>
+      <td>0.003003</td>
+      <td>0.017908</td>
+      <td>0.030186</td>
+      <td>0.006170</td>
+      <td>0.008266</td>
+      <td>0.002646</td>
+      <td>4.833242</td>
+      <td>6.146258</td>
+      <td>33.602542</td>
+      <td>569.356993</td>
+      <td>0.022832</td>
+      <td>0.157336</td>
+      <td>0.208624</td>
+      <td>0.065732</td>
+      <td>0.061867</td>
+      <td>0.018061</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>6.981000</td>
+      <td>9.710000</td>
+      <td>43.790000</td>
+      <td>143.500000</td>
+      <td>0.052630</td>
+      <td>0.019380</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.106000</td>
+      <td>0.049960</td>
+      <td>0.111500</td>
+      <td>0.360200</td>
+      <td>0.757000</td>
+      <td>6.802000</td>
+      <td>0.001713</td>
+      <td>0.002252</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.007882</td>
+      <td>0.000895</td>
+      <td>7.930000</td>
+      <td>12.020000</td>
+      <td>50.410000</td>
+      <td>185.200000</td>
+      <td>0.071170</td>
+      <td>0.027290</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.156500</td>
+      <td>0.055040</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>11.700000</td>
+      <td>16.170000</td>
+      <td>75.170000</td>
+      <td>420.300000</td>
+      <td>0.086370</td>
+      <td>0.064920</td>
+      <td>0.029560</td>
+      <td>0.020310</td>
+      <td>0.161900</td>
+      <td>0.057700</td>
+      <td>0.232400</td>
+      <td>0.833900</td>
+      <td>1.606000</td>
+      <td>17.850000</td>
+      <td>0.005169</td>
+      <td>0.013080</td>
+      <td>0.015090</td>
+      <td>0.007638</td>
+      <td>0.015160</td>
+      <td>0.002248</td>
+      <td>13.010000</td>
+      <td>21.080000</td>
+      <td>84.110000</td>
+      <td>515.300000</td>
+      <td>0.116600</td>
+      <td>0.147200</td>
+      <td>0.114500</td>
+      <td>0.064930</td>
+      <td>0.250400</td>
+      <td>0.071460</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>13.370000</td>
+      <td>18.840000</td>
+      <td>86.240000</td>
+      <td>551.100000</td>
+      <td>0.095870</td>
+      <td>0.092630</td>
+      <td>0.061540</td>
+      <td>0.033500</td>
+      <td>0.179200</td>
+      <td>0.061540</td>
+      <td>0.324200</td>
+      <td>1.108000</td>
+      <td>2.287000</td>
+      <td>24.530000</td>
+      <td>0.006380</td>
+      <td>0.020450</td>
+      <td>0.025890</td>
+      <td>0.010930</td>
+      <td>0.018730</td>
+      <td>0.003187</td>
+      <td>14.970000</td>
+      <td>25.410000</td>
+      <td>97.660000</td>
+      <td>686.500000</td>
+      <td>0.131300</td>
+      <td>0.211900</td>
+      <td>0.226700</td>
+      <td>0.099930</td>
+      <td>0.282200</td>
+      <td>0.080040</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>15.780000</td>
+      <td>21.800000</td>
+      <td>104.100000</td>
+      <td>782.700000</td>
+      <td>0.105300</td>
+      <td>0.130400</td>
+      <td>0.130700</td>
+      <td>0.074000</td>
+      <td>0.195700</td>
+      <td>0.066120</td>
+      <td>0.478900</td>
+      <td>1.474000</td>
+      <td>3.357000</td>
+      <td>45.190000</td>
+      <td>0.008146</td>
+      <td>0.032450</td>
+      <td>0.042050</td>
+      <td>0.014710</td>
+      <td>0.023480</td>
+      <td>0.004558</td>
+      <td>18.790000</td>
+      <td>29.720000</td>
+      <td>125.400000</td>
+      <td>1084.000000</td>
+      <td>0.146000</td>
+      <td>0.339100</td>
+      <td>0.382900</td>
+      <td>0.161400</td>
+      <td>0.317900</td>
+      <td>0.092080</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>28.110000</td>
+      <td>39.280000</td>
+      <td>188.500000</td>
+      <td>2501.000000</td>
+      <td>0.163400</td>
+      <td>0.345400</td>
+      <td>0.426800</td>
+      <td>0.201200</td>
+      <td>0.304000</td>
+      <td>0.097440</td>
+      <td>2.873000</td>
+      <td>4.885000</td>
+      <td>21.980000</td>
+      <td>542.200000</td>
+      <td>0.031130</td>
+      <td>0.135400</td>
+      <td>0.396000</td>
+      <td>0.052790</td>
+      <td>0.078950</td>
+      <td>0.029840</td>
+      <td>36.040000</td>
+      <td>49.540000</td>
+      <td>251.200000</td>
+      <td>4254.000000</td>
+      <td>0.222600</td>
+      <td>1.058000</td>
+      <td>1.252000</td>
+      <td>0.291000</td>
+      <td>0.663800</td>
+      <td>0.207500</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<ul>
+<li>There are large differences between the variables.</li>
+<li><code>mean area</code> has the largest mean value</li>
+<li><code>mean concave points</code> has the minimum 25% percentile value.</li>
+</ul>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>Question 3 [5 points]<a rel="noopener" class="anchor-link" href="#Question-3-[5-points]">&#182;</a></h3><p>These features are all engineered from images. I suspect there is some variables with large correlation. Are there largely correlated variables? Why do you think they are largely correlated? Comment on a few.</p>
+<ul>
+<li>Calculate correlation.</li>
+<li>Create a correlation heatmap.</li>
+<li>Comment on largely correlated variables.</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult">
+<div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean radius</th>
+      <th>mean texture</th>
+      <th>mean perimeter</th>
+      <th>mean area</th>
+      <th>mean smoothness</th>
+      <th>mean compactness</th>
+      <th>mean concavity</th>
+      <th>mean concave points</th>
+      <th>mean symmetry</th>
+      <th>mean fractal dimension</th>
+      <th>radius error</th>
+      <th>texture error</th>
+      <th>perimeter error</th>
+      <th>area error</th>
+      <th>smoothness error</th>
+      <th>compactness error</th>
+      <th>concavity error</th>
+      <th>concave points error</th>
+      <th>symmetry error</th>
+      <th>fractal dimension error</th>
+      <th>worst radius</th>
+      <th>worst texture</th>
+      <th>worst perimeter</th>
+      <th>worst area</th>
+      <th>worst smoothness</th>
+      <th>worst compactness</th>
+      <th>worst concavity</th>
+      <th>worst concave points</th>
+      <th>worst symmetry</th>
+      <th>worst fractal dimension</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mean radius</th>
+      <td>1.000000</td>
+      <td>0.323782</td>
+      <td>0.997855</td>
+      <td>0.987357</td>
+      <td>0.170581</td>
+      <td>0.506124</td>
+      <td>0.676764</td>
+      <td>0.822529</td>
+      <td>0.147741</td>
+      <td>-0.311631</td>
+      <td>0.679090</td>
+      <td>-0.097317</td>
+      <td>0.674172</td>
+      <td>0.735864</td>
+      <td>-0.222600</td>
+      <td>0.206000</td>
+      <td>0.194204</td>
+      <td>0.376169</td>
+      <td>-0.104321</td>
+      <td>-0.042641</td>
+      <td>0.969539</td>
+      <td>0.297008</td>
+      <td>0.965137</td>
+      <td>0.941082</td>
+      <td>0.119616</td>
+      <td>0.413463</td>
+      <td>0.526911</td>
+      <td>0.744214</td>
+      <td>0.163953</td>
+      <td>0.007066</td>
+    </tr>
+    <tr>
+      <th>mean texture</th>
+      <td>0.323782</td>
+      <td>1.000000</td>
+      <td>0.329533</td>
+      <td>0.321086</td>
+      <td>-0.023389</td>
+      <td>0.236702</td>
+      <td>0.302418</td>
+      <td>0.293464</td>
+      <td>0.071401</td>
+      <td>-0.076437</td>
+      <td>0.275869</td>
+      <td>0.386358</td>
+      <td>0.281673</td>
+      <td>0.259845</td>
+      <td>0.006614</td>
+      <td>0.191975</td>
+      <td>0.143293</td>
+      <td>0.163851</td>
+      <td>0.009127</td>
+      <td>0.054458</td>
+      <td>0.352573</td>
+      <td>0.912045</td>
+      <td>0.358040</td>
+      <td>0.343546</td>
+      <td>0.077503</td>
+      <td>0.277830</td>
+      <td>0.301025</td>
+      <td>0.295316</td>
+      <td>0.105008</td>
+      <td>0.119205</td>
+    </tr>
+    <tr>
+      <th>mean perimeter</th>
+      <td>0.997855</td>
+      <td>0.329533</td>
+      <td>1.000000</td>
+      <td>0.986507</td>
+      <td>0.207278</td>
+      <td>0.556936</td>
+      <td>0.716136</td>
+      <td>0.850977</td>
+      <td>0.183027</td>
+      <td>-0.261477</td>
+      <td>0.691765</td>
+      <td>-0.086761</td>
+      <td>0.693135</td>
+      <td>0.744983</td>
+      <td>-0.202694</td>
+      <td>0.250744</td>
+      <td>0.228082</td>
+      <td>0.407217</td>
+      <td>-0.081629</td>
+      <td>-0.005523</td>
+      <td>0.969476</td>
+      <td>0.303038</td>
+      <td>0.970387</td>
+      <td>0.941550</td>
+      <td>0.150549</td>
+      <td>0.455774</td>
+      <td>0.563879</td>
+      <td>0.771241</td>
+      <td>0.189115</td>
+      <td>0.051019</td>
+    </tr>
+    <tr>
+      <th>mean area</th>
+      <td>0.987357</td>
+      <td>0.321086</td>
+      <td>0.986507</td>
+      <td>1.000000</td>
+      <td>0.177028</td>
+      <td>0.498502</td>
+      <td>0.685983</td>
+      <td>0.823269</td>
+      <td>0.151293</td>
+      <td>-0.283110</td>
+      <td>0.732562</td>
+      <td>-0.066280</td>
+      <td>0.726628</td>
+      <td>0.800086</td>
+      <td>-0.166777</td>
+      <td>0.212583</td>
+      <td>0.207660</td>
+      <td>0.372320</td>
+      <td>-0.072497</td>
+      <td>-0.019887</td>
+      <td>0.962746</td>
+      <td>0.287489</td>
+      <td>0.959120</td>
+      <td>0.959213</td>
+      <td>0.123523</td>
+      <td>0.390410</td>
+      <td>0.512606</td>
+      <td>0.722017</td>
+      <td>0.143570</td>
+      <td>0.003738</td>
+    </tr>
+    <tr>
+      <th>mean smoothness</th>
+      <td>0.170581</td>
+      <td>-0.023389</td>
+      <td>0.207278</td>
+      <td>0.177028</td>
+      <td>1.000000</td>
+      <td>0.659123</td>
+      <td>0.521984</td>
+      <td>0.553695</td>
+      <td>0.557775</td>
+      <td>0.584792</td>
+      <td>0.301467</td>
+      <td>0.068406</td>
+      <td>0.296092</td>
+      <td>0.246552</td>
+      <td>0.332375</td>
+      <td>0.318943</td>
+      <td>0.248396</td>
+      <td>0.380676</td>
+      <td>0.200774</td>
+      <td>0.283607</td>
+      <td>0.213120</td>
+      <td>0.036072</td>
+      <td>0.238853</td>
+      <td>0.206718</td>
+      <td>0.805324</td>
+      <td>0.472468</td>
+      <td>0.434926</td>
+      <td>0.503053</td>
+      <td>0.394309</td>
+      <td>0.499316</td>
+    </tr>
+    <tr>
+      <th>mean compactness</th>
+      <td>0.506124</td>
+      <td>0.236702</td>
+      <td>0.556936</td>
+      <td>0.498502</td>
+      <td>0.659123</td>
+      <td>1.000000</td>
+      <td>0.883121</td>
+      <td>0.831135</td>
+      <td>0.602641</td>
+      <td>0.565369</td>
+      <td>0.497473</td>
+      <td>0.046205</td>
+      <td>0.548905</td>
+      <td>0.455653</td>
+      <td>0.135299</td>
+      <td>0.738722</td>
+      <td>0.570517</td>
+      <td>0.642262</td>
+      <td>0.229977</td>
+      <td>0.507318</td>
+      <td>0.535315</td>
+      <td>0.248133</td>
+      <td>0.590210</td>
+      <td>0.509604</td>
+      <td>0.565541</td>
+      <td>0.865809</td>
+      <td>0.816275</td>
+      <td>0.815573</td>
+      <td>0.510223</td>
+      <td>0.687382</td>
+    </tr>
+    <tr>
+      <th>mean concavity</th>
+      <td>0.676764</td>
+      <td>0.302418</td>
+      <td>0.716136</td>
+      <td>0.685983</td>
+      <td>0.521984</td>
+      <td>0.883121</td>
+      <td>1.000000</td>
+      <td>0.921391</td>
+      <td>0.500667</td>
+      <td>0.336783</td>
+      <td>0.631925</td>
+      <td>0.076218</td>
+      <td>0.660391</td>
+      <td>0.617427</td>
+      <td>0.098564</td>
+      <td>0.670279</td>
+      <td>0.691270</td>
+      <td>0.683260</td>
+      <td>0.178009</td>
+      <td>0.449301</td>
+      <td>0.688236</td>
+      <td>0.299879</td>
+      <td>0.729565</td>
+      <td>0.675987</td>
+      <td>0.448822</td>
+      <td>0.754968</td>
+      <td>0.884103</td>
+      <td>0.861323</td>
+      <td>0.409464</td>
+      <td>0.514930</td>
+    </tr>
+    <tr>
+      <th>mean concave points</th>
+      <td>0.822529</td>
+      <td>0.293464</td>
+      <td>0.850977</td>
+      <td>0.823269</td>
+      <td>0.553695</td>
+      <td>0.831135</td>
+      <td>0.921391</td>
+      <td>1.000000</td>
+      <td>0.462497</td>
+      <td>0.166917</td>
+      <td>0.698050</td>
+      <td>0.021480</td>
+      <td>0.710650</td>
+      <td>0.690299</td>
+      <td>0.027653</td>
+      <td>0.490424</td>
+      <td>0.439167</td>
+      <td>0.615634</td>
+      <td>0.095351</td>
+      <td>0.257584</td>
+      <td>0.830318</td>
+      <td>0.292752</td>
+      <td>0.855923</td>
+      <td>0.809630</td>
+      <td>0.452753</td>
+      <td>0.667454</td>
+      <td>0.752399</td>
+      <td>0.910155</td>
+      <td>0.375744</td>
+      <td>0.368661</td>
+    </tr>
+    <tr>
+      <th>mean symmetry</th>
+      <td>0.147741</td>
+      <td>0.071401</td>
+      <td>0.183027</td>
+      <td>0.151293</td>
+      <td>0.557775</td>
+      <td>0.602641</td>
+      <td>0.500667</td>
+      <td>0.462497</td>
+      <td>1.000000</td>
+      <td>0.479921</td>
+      <td>0.303379</td>
+      <td>0.128053</td>
+      <td>0.313893</td>
+      <td>0.223970</td>
+      <td>0.187321</td>
+      <td>0.421659</td>
+      <td>0.342627</td>
+      <td>0.393298</td>
+      <td>0.449137</td>
+      <td>0.331786</td>
+      <td>0.185728</td>
+      <td>0.090651</td>
+      <td>0.219169</td>
+      <td>0.177193</td>
+      <td>0.426675</td>
+      <td>0.473200</td>
+      <td>0.433721</td>
+      <td>0.430297</td>
+      <td>0.699826</td>
+      <td>0.438413</td>
+    </tr>
+    <tr>
+      <th>mean fractal dimension</th>
+      <td>-0.311631</td>
+      <td>-0.076437</td>
+      <td>-0.261477</td>
+      <td>-0.283110</td>
+      <td>0.584792</td>
+      <td>0.565369</td>
+      <td>0.336783</td>
+      <td>0.166917</td>
+      <td>0.479921</td>
+      <td>1.000000</td>
+      <td>0.000111</td>
+      <td>0.164174</td>
+      <td>0.039830</td>
+      <td>-0.090170</td>
+      <td>0.401964</td>
+      <td>0.559837</td>
+      <td>0.446630</td>
+      <td>0.341198</td>
+      <td>0.345007</td>
+      <td>0.688132</td>
+      <td>-0.253691</td>
+      <td>-0.051269</td>
+      <td>-0.205151</td>
+      <td>-0.231854</td>
+      <td>0.504942</td>
+      <td>0.458798</td>
+      <td>0.346234</td>
+      <td>0.175325</td>
+      <td>0.334019</td>
+      <td>0.767297</td>
+    </tr>
+    <tr>
+      <th>radius error</th>
+      <td>0.679090</td>
+      <td>0.275869</td>
+      <td>0.691765</td>
+      <td>0.732562</td>
+      <td>0.301467</td>
+      <td>0.497473</td>
+      <td>0.631925</td>
+      <td>0.698050</td>
+      <td>0.303379</td>
+      <td>0.000111</td>
+      <td>1.000000</td>
+      <td>0.213247</td>
+      <td>0.972794</td>
+      <td>0.951830</td>
+      <td>0.164514</td>
+      <td>0.356065</td>
+      <td>0.332358</td>
+      <td>0.513346</td>
+      <td>0.240567</td>
+      <td>0.227754</td>
+      <td>0.715065</td>
+      <td>0.194799</td>
+      <td>0.719684</td>
+      <td>0.751548</td>
+      <td>0.141919</td>
+      <td>0.287103</td>
+      <td>0.380585</td>
+      <td>0.531062</td>
+      <td>0.094543</td>
+      <td>0.049559</td>
+    </tr>
+    <tr>
+      <th>texture error</th>
+      <td>-0.097317</td>
+      <td>0.386358</td>
+      <td>-0.086761</td>
+      <td>-0.066280</td>
+      <td>0.068406</td>
+      <td>0.046205</td>
+      <td>0.076218</td>
+      <td>0.021480</td>
+      <td>0.128053</td>
+      <td>0.164174</td>
+      <td>0.213247</td>
+      <td>1.000000</td>
+      <td>0.223171</td>
+      <td>0.111567</td>
+      <td>0.397243</td>
+      <td>0.231700</td>
+      <td>0.194998</td>
+      <td>0.230283</td>
+      <td>0.411621</td>
+      <td>0.279723</td>
+      <td>-0.111690</td>
+      <td>0.409003</td>
+      <td>-0.102242</td>
+      <td>-0.083195</td>
+      <td>-0.073658</td>
+      <td>-0.092439</td>
+      <td>-0.068956</td>
+      <td>-0.119638</td>
+      <td>-0.128215</td>
+      <td>-0.045655</td>
+    </tr>
+    <tr>
+      <th>perimeter error</th>
+      <td>0.674172</td>
+      <td>0.281673</td>
+      <td>0.693135</td>
+      <td>0.726628</td>
+      <td>0.296092</td>
+      <td>0.548905</td>
+      <td>0.660391</td>
+      <td>0.710650</td>
+      <td>0.313893</td>
+      <td>0.039830</td>
+      <td>0.972794</td>
+      <td>0.223171</td>
+      <td>1.000000</td>
+      <td>0.937655</td>
+      <td>0.151075</td>
+      <td>0.416322</td>
+      <td>0.362482</td>
+      <td>0.556264</td>
+      <td>0.266487</td>
+      <td>0.244143</td>
+      <td>0.697201</td>
+      <td>0.200371</td>
+      <td>0.721031</td>
+      <td>0.730713</td>
+      <td>0.130054</td>
+      <td>0.341919</td>
+      <td>0.418899</td>
+      <td>0.554897</td>
+      <td>0.109930</td>
+      <td>0.085433</td>
+    </tr>
+    <tr>
+      <th>area error</th>
+      <td>0.735864</td>
+      <td>0.259845</td>
+      <td>0.744983</td>
+      <td>0.800086</td>
+      <td>0.246552</td>
+      <td>0.455653</td>
+      <td>0.617427</td>
+      <td>0.690299</td>
+      <td>0.223970</td>
+      <td>-0.090170</td>
+      <td>0.951830</td>
+      <td>0.111567</td>
+      <td>0.937655</td>
+      <td>1.000000</td>
+      <td>0.075150</td>
+      <td>0.284840</td>
+      <td>0.270895</td>
+      <td>0.415730</td>
+      <td>0.134109</td>
+      <td>0.127071</td>
+      <td>0.757373</td>
+      <td>0.196497</td>
+      <td>0.761213</td>
+      <td>0.811408</td>
+      <td>0.125389</td>
+      <td>0.283257</td>
+      <td>0.385100</td>
+      <td>0.538166</td>
+      <td>0.074126</td>
+      <td>0.017539</td>
+    </tr>
+    <tr>
+      <th>smoothness error</th>
+      <td>-0.222600</td>
+      <td>0.006614</td>
+      <td>-0.202694</td>
+      <td>-0.166777</td>
+      <td>0.332375</td>
+      <td>0.135299</td>
+      <td>0.098564</td>
+      <td>0.027653</td>
+      <td>0.187321</td>
+      <td>0.401964</td>
+      <td>0.164514</td>
+      <td>0.397243</td>
+      <td>0.151075</td>
+      <td>0.075150</td>
+      <td>1.000000</td>
+      <td>0.336696</td>
+      <td>0.268685</td>
+      <td>0.328429</td>
+      <td>0.413506</td>
+      <td>0.427374</td>
+      <td>-0.230691</td>
+      <td>-0.074743</td>
+      <td>-0.217304</td>
+      <td>-0.182195</td>
+      <td>0.314457</td>
+      <td>-0.055558</td>
+      <td>-0.058298</td>
+      <td>-0.102007</td>
+      <td>-0.107342</td>
+      <td>0.101480</td>
+    </tr>
+    <tr>
+      <th>compactness error</th>
+      <td>0.206000</td>
+      <td>0.191975</td>
+      <td>0.250744</td>
+      <td>0.212583</td>
+      <td>0.318943</td>
+      <td>0.738722</td>
+      <td>0.670279</td>
+      <td>0.490424</td>
+      <td>0.421659</td>
+      <td>0.559837</td>
+      <td>0.356065</td>
+      <td>0.231700</td>
+      <td>0.416322</td>
+      <td>0.284840</td>
+      <td>0.336696</td>
+      <td>1.000000</td>
+      <td>0.801268</td>
+      <td>0.744083</td>
+      <td>0.394713</td>
+      <td>0.803269</td>
+      <td>0.204607</td>
+      <td>0.143003</td>
+      <td>0.260516</td>
+      <td>0.199371</td>
+      <td>0.227394</td>
+      <td>0.678780</td>
+      <td>0.639147</td>
+      <td>0.483208</td>
+      <td>0.277878</td>
+      <td>0.590973</td>
+    </tr>
+    <tr>
+      <th>concavity error</th>
+      <td>0.194204</td>
+      <td>0.143293</td>
+      <td>0.228082</td>
+      <td>0.207660</td>
+      <td>0.248396</td>
+      <td>0.570517</td>
+      <td>0.691270</td>
+      <td>0.439167</td>
+      <td>0.342627</td>
+      <td>0.446630</td>
+      <td>0.332358</td>
+      <td>0.194998</td>
+      <td>0.362482</td>
+      <td>0.270895</td>
+      <td>0.268685</td>
+      <td>0.801268</td>
+      <td>1.000000</td>
+      <td>0.771804</td>
+      <td>0.309429</td>
+      <td>0.727372</td>
+      <td>0.186904</td>
+      <td>0.100241</td>
+      <td>0.226680</td>
+      <td>0.188353</td>
+      <td>0.168481</td>
+      <td>0.484858</td>
+      <td>0.662564</td>
+      <td>0.440472</td>
+      <td>0.197788</td>
+      <td>0.439329</td>
+    </tr>
+    <tr>
+      <th>concave points error</th>
+      <td>0.376169</td>
+      <td>0.163851</td>
+      <td>0.407217</td>
+      <td>0.372320</td>
+      <td>0.380676</td>
+      <td>0.642262</td>
+      <td>0.683260</td>
+      <td>0.615634</td>
+      <td>0.393298</td>
+      <td>0.341198</td>
+      <td>0.513346</td>
+      <td>0.230283</td>
+      <td>0.556264</td>
+      <td>0.415730</td>
+      <td>0.328429</td>
+      <td>0.744083</td>
+      <td>0.771804</td>
+      <td>1.000000</td>
+      <td>0.312780</td>
+      <td>0.611044</td>
+      <td>0.358127</td>
+      <td>0.086741</td>
+      <td>0.394999</td>
+      <td>0.342271</td>
+      <td>0.215351</td>
+      <td>0.452888</td>
+      <td>0.549592</td>
+      <td>0.602450</td>
+      <td>0.143116</td>
+      <td>0.310655</td>
+    </tr>
+    <tr>
+      <th>symmetry error</th>
+      <td>-0.104321</td>
+      <td>0.009127</td>
+      <td>-0.081629</td>
+      <td>-0.072497</td>
+      <td>0.200774</td>
+      <td>0.229977</td>
+      <td>0.178009</td>
+      <td>0.095351</td>
+      <td>0.449137</td>
+      <td>0.345007</td>
+      <td>0.240567</td>
+      <td>0.411621</td>
+      <td>0.266487</td>
+      <td>0.134109</td>
+      <td>0.413506</td>
+      <td>0.394713</td>
+      <td>0.309429</td>
+      <td>0.312780</td>
+      <td>1.000000</td>
+      <td>0.369078</td>
+      <td>-0.128121</td>
+      <td>-0.077473</td>
+      <td>-0.103753</td>
+      <td>-0.110343</td>
+      <td>-0.012662</td>
+      <td>0.060255</td>
+      <td>0.037119</td>
+      <td>-0.030413</td>
+      <td>0.389402</td>
+      <td>0.078079</td>
+    </tr>
+    <tr>
+      <th>fractal dimension error</th>
+      <td>-0.042641</td>
+      <td>0.054458</td>
+      <td>-0.005523</td>
+      <td>-0.019887</td>
+      <td>0.283607</td>
+      <td>0.507318</td>
+      <td>0.449301</td>
+      <td>0.257584</td>
+      <td>0.331786</td>
+      <td>0.688132</td>
+      <td>0.227754</td>
+      <td>0.279723</td>
+      <td>0.244143</td>
+      <td>0.127071</td>
+      <td>0.427374</td>
+      <td>0.803269</td>
+      <td>0.727372</td>
+      <td>0.611044</td>
+      <td>0.369078</td>
+      <td>1.000000</td>
+      <td>-0.037488</td>
+      <td>-0.003195</td>
+      <td>-0.001000</td>
+      <td>-0.022736</td>
+      <td>0.170568</td>
+      <td>0.390159</td>
+      <td>0.379975</td>
+      <td>0.215204</td>
+      <td>0.111094</td>
+      <td>0.591328</td>
+    </tr>
+    <tr>
+      <th>worst radius</th>
+      <td>0.969539</td>
+      <td>0.352573</td>
+      <td>0.969476</td>
+      <td>0.962746</td>
+      <td>0.213120</td>
+      <td>0.535315</td>
+      <td>0.688236</td>
+      <td>0.830318</td>
+      <td>0.185728</td>
+      <td>-0.253691</td>
+      <td>0.715065</td>
+      <td>-0.111690</td>
+      <td>0.697201</td>
+      <td>0.757373</td>
+      <td>-0.230691</td>
+      <td>0.204607</td>
+      <td>0.186904</td>
+      <td>0.358127</td>
+      <td>-0.128121</td>
+      <td>-0.037488</td>
+      <td>1.000000</td>
+      <td>0.359921</td>
+      <td>0.993708</td>
+      <td>0.984015</td>
+      <td>0.216574</td>
+      <td>0.475820</td>
+      <td>0.573975</td>
+      <td>0.787424</td>
+      <td>0.243529</td>
+      <td>0.093492</td>
+    </tr>
+    <tr>
+      <th>worst texture</th>
+      <td>0.297008</td>
+      <td>0.912045</td>
+      <td>0.303038</td>
+      <td>0.287489</td>
+      <td>0.036072</td>
+      <td>0.248133</td>
+      <td>0.299879</td>
+      <td>0.292752</td>
+      <td>0.090651</td>
+      <td>-0.051269</td>
+      <td>0.194799</td>
+      <td>0.409003</td>
+      <td>0.200371</td>
+      <td>0.196497</td>
+      <td>-0.074743</td>
+      <td>0.143003</td>
+      <td>0.100241</td>
+      <td>0.086741</td>
+      <td>-0.077473</td>
+      <td>-0.003195</td>
+      <td>0.359921</td>
+      <td>1.000000</td>
+      <td>0.365098</td>
+      <td>0.345842</td>
+      <td>0.225429</td>
+      <td>0.360832</td>
+      <td>0.368366</td>
+      <td>0.359755</td>
+      <td>0.233027</td>
+      <td>0.219122</td>
+    </tr>
+    <tr>
+      <th>worst perimeter</th>
+      <td>0.965137</td>
+      <td>0.358040</td>
+      <td>0.970387</td>
+      <td>0.959120</td>
+      <td>0.238853</td>
+      <td>0.590210</td>
+      <td>0.729565</td>
+      <td>0.855923</td>
+      <td>0.219169</td>
+      <td>-0.205151</td>
+      <td>0.719684</td>
+      <td>-0.102242</td>
+      <td>0.721031</td>
+      <td>0.761213</td>
+      <td>-0.217304</td>
+      <td>0.260516</td>
+      <td>0.226680</td>
+      <td>0.394999</td>
+      <td>-0.103753</td>
+      <td>-0.001000</td>
+      <td>0.993708</td>
+      <td>0.365098</td>
+      <td>1.000000</td>
+      <td>0.977578</td>
+      <td>0.236775</td>
+      <td>0.529408</td>
+      <td>0.618344</td>
+      <td>0.816322</td>
+      <td>0.269493</td>
+      <td>0.138957</td>
+    </tr>
+    <tr>
+      <th>worst area</th>
+      <td>0.941082</td>
+      <td>0.343546</td>
+      <td>0.941550</td>
+      <td>0.959213</td>
+      <td>0.206718</td>
+      <td>0.509604</td>
+      <td>0.675987</td>
+      <td>0.809630</td>
+      <td>0.177193</td>
+      <td>-0.231854</td>
+      <td>0.751548</td>
+      <td>-0.083195</td>
+      <td>0.730713</td>
+      <td>0.811408</td>
+      <td>-0.182195</td>
+      <td>0.199371</td>
+      <td>0.188353</td>
+      <td>0.342271</td>
+      <td>-0.110343</td>
+      <td>-0.022736</td>
+      <td>0.984015</td>
+      <td>0.345842</td>
+      <td>0.977578</td>
+      <td>1.000000</td>
+      <td>0.209145</td>
+      <td>0.438296</td>
+      <td>0.543331</td>
+      <td>0.747419</td>
+      <td>0.209146</td>
+      <td>0.079647</td>
+    </tr>
+    <tr>
+      <th>worst smoothness</th>
+      <td>0.119616</td>
+      <td>0.077503</td>
+      <td>0.150549</td>
+      <td>0.123523</td>
+      <td>0.805324</td>
+      <td>0.565541</td>
+      <td>0.448822</td>
+      <td>0.452753</td>
+      <td>0.426675</td>
+      <td>0.504942</td>
+      <td>0.141919</td>
+      <td>-0.073658</td>
+      <td>0.130054</td>
+      <td>0.125389</td>
+      <td>0.314457</td>
+      <td>0.227394</td>
+      <td>0.168481</td>
+      <td>0.215351</td>
+      <td>-0.012662</td>
+      <td>0.170568</td>
+      <td>0.216574</td>
+      <td>0.225429</td>
+      <td>0.236775</td>
+      <td>0.209145</td>
+      <td>1.000000</td>
+      <td>0.568187</td>
+      <td>0.518523</td>
+      <td>0.547691</td>
+      <td>0.493838</td>
+      <td>0.617624</td>
+    </tr>
+    <tr>
+      <th>worst compactness</th>
+      <td>0.413463</td>
+      <td>0.277830</td>
+      <td>0.455774</td>
+      <td>0.390410</td>
+      <td>0.472468</td>
+      <td>0.865809</td>
+      <td>0.754968</td>
+      <td>0.667454</td>
+      <td>0.473200</td>
+      <td>0.458798</td>
+      <td>0.287103</td>
+      <td>-0.092439</td>
+      <td>0.341919</td>
+      <td>0.283257</td>
+      <td>-0.055558</td>
+      <td>0.678780</td>
+      <td>0.484858</td>
+      <td>0.452888</td>
+      <td>0.060255</td>
+      <td>0.390159</td>
+      <td>0.475820</td>
+      <td>0.360832</td>
+      <td>0.529408</td>
+      <td>0.438296</td>
+      <td>0.568187</td>
+      <td>1.000000</td>
+      <td>0.892261</td>
+      <td>0.801080</td>
+      <td>0.614441</td>
+      <td>0.810455</td>
+    </tr>
+    <tr>
+      <th>worst concavity</th>
+      <td>0.526911</td>
+      <td>0.301025</td>
+      <td>0.563879</td>
+      <td>0.512606</td>
+      <td>0.434926</td>
+      <td>0.816275</td>
+      <td>0.884103</td>
+      <td>0.752399</td>
+      <td>0.433721</td>
+      <td>0.346234</td>
+      <td>0.380585</td>
+      <td>-0.068956</td>
+      <td>0.418899</td>
+      <td>0.385100</td>
+      <td>-0.058298</td>
+      <td>0.639147</td>
+      <td>0.662564</td>
+      <td>0.549592</td>
+      <td>0.037119</td>
+      <td>0.379975</td>
+      <td>0.573975</td>
+      <td>0.368366</td>
+      <td>0.618344</td>
+      <td>0.543331</td>
+      <td>0.518523</td>
+      <td>0.892261</td>
+      <td>1.000000</td>
+      <td>0.855434</td>
+      <td>0.532520</td>
+      <td>0.686511</td>
+    </tr>
+    <tr>
+      <th>worst concave points</th>
+      <td>0.744214</td>
+      <td>0.295316</td>
+      <td>0.771241</td>
+      <td>0.722017</td>
+      <td>0.503053</td>
+      <td>0.815573</td>
+      <td>0.861323</td>
+      <td>0.910155</td>
+      <td>0.430297</td>
+      <td>0.175325</td>
+      <td>0.531062</td>
+      <td>-0.119638</td>
+      <td>0.554897</td>
+      <td>0.538166</td>
+      <td>-0.102007</td>
+      <td>0.483208</td>
+      <td>0.440472</td>
+      <td>0.602450</td>
+      <td>-0.030413</td>
+      <td>0.215204</td>
+      <td>0.787424</td>
+      <td>0.359755</td>
+      <td>0.816322</td>
+      <td>0.747419</td>
+      <td>0.547691</td>
+      <td>0.801080</td>
+      <td>0.855434</td>
+      <td>1.000000</td>
+      <td>0.502528</td>
+      <td>0.511114</td>
+    </tr>
+    <tr>
+      <th>worst symmetry</th>
+      <td>0.163953</td>
+      <td>0.105008</td>
+      <td>0.189115</td>
+      <td>0.143570</td>
+      <td>0.394309</td>
+      <td>0.510223</td>
+      <td>0.409464</td>
+      <td>0.375744</td>
+      <td>0.699826</td>
+      <td>0.334019</td>
+      <td>0.094543</td>
+      <td>-0.128215</td>
+      <td>0.109930</td>
+      <td>0.074126</td>
+      <td>-0.107342</td>
+      <td>0.277878</td>
+      <td>0.197788</td>
+      <td>0.143116</td>
+      <td>0.389402</td>
+      <td>0.111094</td>
+      <td>0.243529</td>
+      <td>0.233027</td>
+      <td>0.269493</td>
+      <td>0.209146</td>
+      <td>0.493838</td>
+      <td>0.614441</td>
+      <td>0.532520</td>
+      <td>0.502528</td>
+      <td>1.000000</td>
+      <td>0.537848</td>
+    </tr>
+    <tr>
+      <th>worst fractal dimension</th>
+      <td>0.007066</td>
+      <td>0.119205</td>
+      <td>0.051019</td>
+      <td>0.003738</td>
+      <td>0.499316</td>
+      <td>0.687382</td>
+      <td>0.514930</td>
+      <td>0.368661</td>
+      <td>0.438413</td>
+      <td>0.767297</td>
+      <td>0.049559</td>
+      <td>-0.045655</td>
+      <td>0.085433</td>
+      <td>0.017539</td>
+      <td>0.101480</td>
+      <td>0.590973</td>
+      <td>0.439329</td>
+      <td>0.310655</td>
+      <td>0.078079</td>
+      <td>0.591328</td>
+      <td>0.093492</td>
+      <td>0.219122</td>
+      <td>0.138957</td>
+      <td>0.079647</td>
+      <td>0.617624</td>
+      <td>0.810455</td>
+      <td>0.686511</td>
+      <td>0.511114</td>
+      <td>0.537848</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[17]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># use seaborn function to print the heatmap</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">corr</span><span class="p">());</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedImage jp-OutputArea-output">
+<img src="javascript://"/>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>We can see a mean raduis and mean parameter. a correlation of 0.997855, and a correlation of 0.987357 between mean raduis and mean area. 
+We can conclude that as the value of the mean radius increases, so does the mean parameter.
+There is a negative correlation between mean texture and mean smoothness, implying that as mean texture increases, so does mean smoothness.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>Train - Test split<a rel="noopener" class="anchor-link" href="#Train---Test-split">&#182;</a></h3><ul>
+<li>Use sklearn&#39;s <code>tran_test_split()</code> function to create the split.</li>
+<li><p>Use <code>random_state = 55</code> to create consistent and repeatable train-test splits.</p>
+</li>
+<li><p>What is the proportion of cancer classes in train and test sets after splitting? Are they equal or very close to each other?</p>
+</li>
+<li>What is the importance of stratified sampling?</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">55</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[19]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelBinarizer</span>
+<span class="n">lb</span> <span class="o">=</span> <span class="n">LabelBinarizer</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[20]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">y</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>0      M
+1      M
+2      M
+3      M
+4      M
+      ..
+564    M
+565    M
+566    M
+567    M
+568    B
+Name: diagnosis, Length: 569, dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[21]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">lb</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[22]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[23]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">y</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>0      1
+1      1
+2      1
+3      1
+4      1
+      ..
+564    1
+565    1
+566    1
+567    1
+568    0
+Length: 569, dtype: int32</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[24]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># split the datasets into training and test data</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">55</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span> <span class="mf">0.25</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[25]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">y_train</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[25]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>0    0.626761
+1    0.373239
+dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[26]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">y_test</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>0    0.629371
+1    0.370629
+dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>Stratified random sampling ensures that the splits keep their proportion of targets values. This is important to stay consistent with the data collected.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>Now let&#39;s train a logistic regression model on the breast cancer data. This is a binary classification problem.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>Question 4 [10 points]<a rel="noopener" class="anchor-link" href="#Question-4-[10-points]">&#182;</a></h3>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<ul>
+<li>Initiate the logistic regression classifier from the sklearn library as shown below.</li>
+<li>Fit the model</li>
+<li>Make predictions</li>
+<li>Calculate accuracy score. What are the <strong>training</strong> and <strong>testing</strong> accuracies of the model?</li>
+<li>Create confusion matrix</li>
+<li>Either calculate using the confusion matrix, or use the methods in <code>metrics</code> to get the following metrics on the testing set:<ul>
+<li>Recall (Sensitivity)</li>
+<li>Specificity</li>
+<li>Precision</li>
+<li>False Positive Rate</li>
+<li>F1 Score</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[27]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[28]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[29]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># evaluate how the classifier performs on the training set </span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>LogisticRegression(C=0.1, max_iter=10000)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[30]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#predict the labels of the data values </span>
+<span class="n">pred_train</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[31]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">pred_train</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[31]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>array([1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0,
+       0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0,
+       0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0,
+       0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0,
+       1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1,
+       0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0,
+       1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0,
+       0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1,
+       1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0,
+       1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0,
+       0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0,
+       1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+       0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1,
+       0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0,
+       0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0,
+       0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1,
+       0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+       1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0,
+       1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0,
+       1, 0, 1, 1, 0, 1, 0, 1])</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[32]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">pred_test</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">pred_test</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[32]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>array([0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1,
+       0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1,
+       1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1,
+       0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0,
+       0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0,
+       0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0,
+       1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0])</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h1>training accuracy<a rel="noopener" class="anchor-link" href="#training-accuracy">&#182;</a></h1>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[33]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">y_train</span> <span class="o">==</span> <span class="n">pred_train</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[33]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>0.9413145539906104</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h1>testing accuracy<a rel="noopener" class="anchor-link" href="#testing-accuracy">&#182;</a></h1>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[34]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="n">pred_test</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[34]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>0.986013986013986</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[35]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Confusion Matrix</span>
+<span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[35]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>array([[89,  1],
+       [ 1, 52]], dtype=int64)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[36]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output">
+<pre>              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99        90
+           1       0.98      0.98      0.98        53
+
+    accuracy                           0.99       143
+   macro avg       0.99      0.99      0.99       143
+weighted avg       0.99      0.99      0.99       143
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>Question 5 [10 points]<a rel="noopener" class="anchor-link" href="#Question-5-[10-points]">&#182;</a></h3>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<ul>
+<li>Initiate the k-nearest neighbours classifier from the sklearn library with n_neighbors=1. Keep the remaining parameters with their default values. (No need to specify anything)</li>
+<li>Fit the model</li>
+<li>Make predictions</li>
+<li>Calculate accuracy score. What are the <strong>training</strong> and <strong>testing</strong> accuracies of the model?</li>
+<li>Create confusion matrix</li>
+<li>Either calculate using the confusion matrix, or using the methods in <code>metrics</code> to get the following metrics on the testing set:<ul>
+<li>Recall (Sensitivity)</li>
+<li>Specificity</li>
+<li>Precision</li>
+<li>F1 Score</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[37]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[38]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[39]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[39]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>KNeighborsClassifier(n_neighbors=1)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[40]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">pred_train</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">pred_train</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[40]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>array([1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0,
+       0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0,
+       0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0,
+       0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0,
+       1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1,
+       0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0,
+       1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0,
+       0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1,
+       1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+       1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0,
+       0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0,
+       1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0,
+       0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1,
+       0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0,
+       0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0,
+       0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1,
+       0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+       1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0,
+       1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0,
+       1, 0, 1, 1, 1, 1, 0, 1])</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[41]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">pred_test</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">pred_test</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[41]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>array([0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1,
+       0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1,
+       1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1,
+       0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0,
+       0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0,
+       0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0,
+       1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1])</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h1>train accuracy<a rel="noopener" class="anchor-link" href="#train-accuracy">&#182;</a></h1>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[42]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy:&quot;</span><span class="p">,</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">pred_train</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output">
+<pre>Accuracy: 1.0
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h1>Testing accuracy<a rel="noopener" class="anchor-link" href="#Testing-accuracy">&#182;</a></h1>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[43]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy:&quot;</span><span class="p">,</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output">
+<pre>Accuracy: 0.9440559440559441
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[44]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[44]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>array([[86,  4],
+       [ 4, 49]], dtype=int64)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[45]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_test</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output">
+<pre>              precision    recall  f1-score   support
+
+           0       0.96      0.96      0.96        90
+           1       0.92      0.92      0.92        53
+
+    accuracy                           0.94       143
+   macro avg       0.94      0.94      0.94       143
+weighted avg       0.94      0.94      0.94       143
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>Question 6 [10 points]<a rel="noopener" class="anchor-link" href="#Question-6-[10-points]">&#182;</a></h3>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>In logistic regression keeping the other parameters constant try these values for C: <code>C_list = [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1, 2, 10, 50, 100, 200, 500, 1000, 2000, 5000, 10000]</code>.<br/>
+C is the inverse of the regularization parameter $\lambda$. As C increases, the penalty decreases.</p>
+<ul>
+<li>Create a loop and fit the models using each C value. </li>
+<li>Make predictions</li>
+<li>Calculate accuracy scores for <strong>training</strong> and <strong>testing</strong> datasets. Create a list of accuracy results for train and test accuracies. Show these lists.</li>
+<li>Create the validation curve based on each C value and the corresponding train and test accuracies. <blockquote><p>Create this curve yourself. Do not use sklearn built-in function.</p>
+</blockquote>
+</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[46]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">C_list</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.0005</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[47]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">logistic_regression</span><span class="p">(</span><span class="n">C_list</span><span class="p">,</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">):</span>
+    <span class="n">accuracy_train</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">accuracy_test</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">predTrain</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">predTest</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="n">C_list</span><span class="p">:</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="p">)</span>
+        <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        <span class="n">predTrain</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+        <span class="n">predTest</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+        <span class="n">accuracy_train</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">predTrain</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+        <span class="n">accuracy_test</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span> <span class="o">=</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">predTest</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">accuracy_train</span><span class="p">,</span><span class="n">accuracy_test</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[48]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">accuracy_train</span><span class="p">,</span><span class="n">accuracy_test</span> <span class="o">=</span> <span class="n">logistic_regression</span><span class="p">(</span><span class="n">C_list</span><span class="p">,</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[49]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">accuracy_train</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[49]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>[92.48826291079813,
+ 93.1924882629108,
+ 94.13145539906104,
+ 93.42723004694837,
+ 93.66197183098592,
+ 94.13145539906104,
+ 94.13145539906104,
+ 94.60093896713614,
+ 94.83568075117371,
+ 95.07042253521126,
+ 96.24413145539906,
+ 96.94835680751174,
+ 97.65258215962442,
+ 98.59154929577466,
+ 98.82629107981221,
+ 98.82629107981221,
+ 99.06103286384976,
+ 98.82629107981221,
+ 98.82629107981221]</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[50]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">accuracy_test</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[50]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>[93.7062937062937,
+ 95.8041958041958,
+ 97.9020979020979,
+ 97.2027972027972,
+ 97.2027972027972,
+ 97.9020979020979,
+ 98.6013986013986,
+ 99.3006993006993,
+ 99.3006993006993,
+ 99.3006993006993,
+ 99.3006993006993,
+ 98.6013986013986,
+ 99.3006993006993,
+ 99.3006993006993,
+ 98.6013986013986,
+ 97.2027972027972,
+ 98.6013986013986,
+ 97.2027972027972,
+ 97.2027972027972]</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[51]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;train&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">accuracy_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;val&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Validation Curve for Logestic Regression&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">C_list</span><span class="p">)),</span> <span class="n">labels</span><span class="o">=</span><span class="n">C_list</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedImage jp-OutputArea-output">
+<img src="javascript://"/>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>Question 7 [10 points]<a rel="noopener" class="anchor-link" href="#Question-7-[10-points]">&#182;</a></h3>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>In K Nearest Neighbors keeping the other parameters constant try these values for K (n_neighbors): <code>K_list = [1,3,5,7,9,15,19,25,29,35,39,45,49]</code>.</p>
+<ul>
+<li>Create a loop and fit the models using each K value. </li>
+<li>Make predictions</li>
+<li>Calculate accuracy scores for <strong>training</strong> and <strong>testing</strong> datasets. Create a list of accuracy results for train and test accuracies. Show these lists.</li>
+<li>Create the validation curve based on each K value and the corresponding train and test accuracies. <blockquote><p>Create this curve yourself. Do not use sklearn built-in function.</p>
+</blockquote>
+</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[52]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">K_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">39</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">99</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[53]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">accuracy_train</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">accuracy_test</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">predTest</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">predTrain</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">K</span> <span class="ow">in</span> <span class="n">K_list</span><span class="p">:</span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">K</span><span class="p">)</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">predTrain</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">predTest</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">accuracy_train</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">predTrain</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+    <span class="n">accuracy_test</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span> <span class="o">=</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">predTest</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[54]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">accuracy_train</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[54]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>[100.0,
+ 94.83568075117371,
+ 94.60093896713614,
+ 93.89671361502347,
+ 93.1924882629108,
+ 92.48826291079813,
+ 92.72300469483568,
+ 92.48826291079813,
+ 92.25352112676056,
+ 92.25352112676056,
+ 92.25352112676056,
+ 91.31455399061032,
+ 90.84507042253522,
+ 90.14084507042254]</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[55]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">accuracy_test</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[55]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>[94.4055944055944,
+ 96.5034965034965,
+ 93.7062937062937,
+ 94.4055944055944,
+ 93.7062937062937,
+ 94.4055944055944,
+ 94.4055944055944,
+ 93.7062937062937,
+ 93.7062937062937,
+ 93.7062937062937,
+ 93.00699300699301,
+ 92.3076923076923,
+ 93.00699300699301,
+ 90.9090909090909]</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[56]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;train&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">accuracy_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;val&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Validation Curve&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">K_list</span><span class="p">)),</span> <span class="n">labels</span><span class="o">=</span><span class="n">K_list</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedImage jp-OutputArea-output">
+<img src="javascript://"/>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[&#160;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>Question 8 [10 points]<a rel="noopener" class="anchor-link" href="#Question-8-[10-points]">&#182;</a></h3>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<ul>
+<li>The validation curve for logistic regression seems a bit weird. That might have to do with the fact that the data is not normalized.</li>
+<li>Apply standardization to the data.</li>
+<li>In logistic regression keeping the other parameters constant try these values for C: <code>C_list = [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1, 2, 10, 50, 100, 200, 500, 1000, 2000, 5000, 10000]</code>.  </li>
+<li>Plot validation curves. What do you see? </li>
+<li>Which value would you choose for C in logistic regression?</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[57]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[58]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">ss</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_ss</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_ss</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[61]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">accuracy_train</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">accuracy_test</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">predTrain</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">predTest</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">C</span> <span class="ow">in</span> <span class="n">C_list</span><span class="p">:</span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="p">)</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_ss</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">predTrain</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_ss</span><span class="p">)</span>
+    <span class="n">predTest</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_ss</span><span class="p">)</span>
+    <span class="n">accuracy_train</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">predTrain</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+    <span class="n">accuracy_test</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span> <span class="o">=</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">predTest</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[62]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;train&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">accuracy_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;val&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Validation Curve for Logestic Regression&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">C_list</span><span class="p">)),</span> <span class="n">labels</span><span class="o">=</span><span class="n">C_list</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedImage jp-OutputArea-output">
+<img src="javascript://"/>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>Both the validation curve and the training curve to look as similar to each other.
+We will choose C as 0.5.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>Question 9 [10 points]<a rel="noopener" class="anchor-link" href="#Question-9-[10-points]">&#182;</a></h3>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<ul>
+<li>After choosing your best C value, let&#39;s check the learning curve.</li>
+<li>Create a logistic regression model of your chosen C value.</li>
+<li>Starting from 10 data points in the training set, increase your training set size by 1 points in each iteration, fit the model, get the accuracy scores for both the current training and test sets.</li>
+<li>Increase the training set size consecutively. Do not randomly select data points. (<code>X_train_ss[0:N,:] where N = {1,2,3,...,len(X_train_ss)}</code>)</li>
+<li>Plot the learning curve. What do you see? Comment on your finding. </li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[63]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">X_train_ss</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[63]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>(426, 30)</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[64]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># list(range(1, X_train_ss.shape[0]))</span>
+<span class="n">n</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">X_train_ss</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">,:]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[64]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>array([[-0.50323613,  1.73953408, -0.44053352, -0.49664617,  0.53358854,
+         0.59839524,  0.25384105, -0.07259947,  0.47589812,  0.94655516,
+         0.01943197,  1.10918571, -0.08331186, -0.11344568,  0.73341644,
+         0.68332997,  0.17965816,  0.26900086, -0.2116796 ,  0.6599449 ,
+        -0.12918496,  2.17946516, -0.1622508 , -0.19511526,  1.9967161 ,
+         1.31027091,  0.79584853,  0.47330699,  0.45100311,  1.90561739]])</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[65]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">y_train</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[65]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>193    1
+543    0
+255    1
+142    0
+330    1
+      ..
+167    1
+73     1
+366    1
+245    0
+239    1
+Length: 426, dtype: int32</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[66]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">accuracy_train</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">accuracy_test</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">X_train_ss</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_ss</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">,:],</span> <span class="n">y_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">])</span>
+    <span class="n">pred_trn</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_ss</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">,:])</span>
+    <span class="n">accuracy_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">],</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">pred_trn</span><span class="p">))</span>
+    <span class="n">pred_tst</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_ss</span><span class="p">)</span>
+    <span class="n">accuracy_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span> <span class="o">=</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">pred_tst</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[67]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">accuracy_train</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">accuracy_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Val&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Number of points&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Learning Curve&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedImage jp-OutputArea-output">
+<img src="javascript://"/>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<h3>Question 10 [20 points]<a rel="noopener" class="anchor-link" href="#Question-10-[20-points]">&#182;</a></h3><ul>
+<li>Think of other ways of improving the accuracy and list at least two possibilities.</li>
+<li>Implement both the methods you proposed. </li>
+<li>Is the model accuracy increasing? Why do you think this might have helped?</li>
+<li>If both of them did not impove, can you think of anything else? (Optional to apply)</li>
+</ul>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>By removing the highly correlaated variable we can improve the accuracy</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[79]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;mean radius&#39;</span><span class="p">,</span><span class="s1">&#39;mean perimeter&#39;</span><span class="p">,</span><span class="s1">&#39;mean concavity&#39;</span><span class="p">,</span><span class="s1">&#39;perimeter error&#39;</span><span class="p">,</span><span class="s1">&#39;worst area&#39;</span><span class="p">,</span><span class="s1">&#39;worst perimeter&#39;</span> <span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">A</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[79]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult">
+<div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean texture</th>
+      <th>mean area</th>
+      <th>mean smoothness</th>
+      <th>mean compactness</th>
+      <th>mean concave points</th>
+      <th>mean symmetry</th>
+      <th>mean fractal dimension</th>
+      <th>radius error</th>
+      <th>texture error</th>
+      <th>area error</th>
+      <th>smoothness error</th>
+      <th>compactness error</th>
+      <th>concavity error</th>
+      <th>concave points error</th>
+      <th>symmetry error</th>
+      <th>fractal dimension error</th>
+      <th>worst radius</th>
+      <th>worst texture</th>
+      <th>worst smoothness</th>
+      <th>worst compactness</th>
+      <th>worst concavity</th>
+      <th>worst concave points</th>
+      <th>worst symmetry</th>
+      <th>worst fractal dimension</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10.38</td>
+      <td>1001.0</td>
+      <td>0.11840</td>
+      <td>0.27760</td>
+      <td>0.14710</td>
+      <td>0.2419</td>
+      <td>0.07871</td>
+      <td>1.0950</td>
+      <td>0.9053</td>
+      <td>153.40</td>
+      <td>0.006399</td>
+      <td>0.04904</td>
+      <td>0.05373</td>
+      <td>0.01587</td>
+      <td>0.03003</td>
+      <td>0.006193</td>
+      <td>25.380</td>
+      <td>17.33</td>
+      <td>0.16220</td>
+      <td>0.66560</td>
+      <td>0.7119</td>
+      <td>0.2654</td>
+      <td>0.4601</td>
+      <td>0.11890</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>17.77</td>
+      <td>1326.0</td>
+      <td>0.08474</td>
+      <td>0.07864</td>
+      <td>0.07017</td>
+      <td>0.1812</td>
+      <td>0.05667</td>
+      <td>0.5435</td>
+      <td>0.7339</td>
+      <td>74.08</td>
+      <td>0.005225</td>
+      <td>0.01308</td>
+      <td>0.01860</td>
+      <td>0.01340</td>
+      <td>0.01389</td>
+      <td>0.003532</td>
+      <td>24.990</td>
+      <td>23.41</td>
+      <td>0.12380</td>
+      <td>0.18660</td>
+      <td>0.2416</td>
+      <td>0.1860</td>
+      <td>0.2750</td>
+      <td>0.08902</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.25</td>
+      <td>1203.0</td>
+      <td>0.10960</td>
+      <td>0.15990</td>
+      <td>0.12790</td>
+      <td>0.2069</td>
+      <td>0.05999</td>
+      <td>0.7456</td>
+      <td>0.7869</td>
+      <td>94.03</td>
+      <td>0.006150</td>
+      <td>0.04006</td>
+      <td>0.03832</td>
+      <td>0.02058</td>
+      <td>0.02250</td>
+      <td>0.004571</td>
+      <td>23.570</td>
+      <td>25.53</td>
+      <td>0.14440</td>
+      <td>0.42450</td>
+      <td>0.4504</td>
+      <td>0.2430</td>
+      <td>0.3613</td>
+      <td>0.08758</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>20.38</td>
+      <td>386.1</td>
+      <td>0.14250</td>
+      <td>0.28390</td>
+      <td>0.10520</td>
+      <td>0.2597</td>
+      <td>0.09744</td>
+      <td>0.4956</td>
+      <td>1.1560</td>
+      <td>27.23</td>
+      <td>0.009110</td>
+      <td>0.07458</td>
+      <td>0.05661</td>
+      <td>0.01867</td>
+      <td>0.05963</td>
+      <td>0.009208</td>
+      <td>14.910</td>
+      <td>26.50</td>
+      <td>0.20980</td>
+      <td>0.86630</td>
+      <td>0.6869</td>
+      <td>0.2575</td>
+      <td>0.6638</td>
+      <td>0.17300</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>14.34</td>
+      <td>1297.0</td>
+      <td>0.10030</td>
+      <td>0.13280</td>
+      <td>0.10430</td>
+      <td>0.1809</td>
+      <td>0.05883</td>
+      <td>0.7572</td>
+      <td>0.7813</td>
+      <td>94.44</td>
+      <td>0.011490</td>
+      <td>0.02461</td>
+      <td>0.05688</td>
+      <td>0.01885</td>
+      <td>0.01756</td>
+      <td>0.005115</td>
+      <td>22.540</td>
+      <td>16.67</td>
+      <td>0.13740</td>
+      <td>0.20500</td>
+      <td>0.4000</td>
+      <td>0.1625</td>
+      <td>0.2364</td>
+      <td>0.07678</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>564</th>
+      <td>22.39</td>
+      <td>1479.0</td>
+      <td>0.11100</td>
+      <td>0.11590</td>
+      <td>0.13890</td>
+      <td>0.1726</td>
+      <td>0.05623</td>
+      <td>1.1760</td>
+      <td>1.2560</td>
+      <td>158.70</td>
+      <td>0.010300</td>
+      <td>0.02891</td>
+      <td>0.05198</td>
+      <td>0.02454</td>
+      <td>0.01114</td>
+      <td>0.004239</td>
+      <td>25.450</td>
+      <td>26.40</td>
+      <td>0.14100</td>
+      <td>0.21130</td>
+      <td>0.4107</td>
+      <td>0.2216</td>
+      <td>0.2060</td>
+      <td>0.07115</td>
+    </tr>
+    <tr>
+      <th>565</th>
+      <td>28.25</td>
+      <td>1261.0</td>
+      <td>0.09780</td>
+      <td>0.10340</td>
+      <td>0.09791</td>
+      <td>0.1752</td>
+      <td>0.05533</td>
+      <td>0.7655</td>
+      <td>2.4630</td>
+      <td>99.04</td>
+      <td>0.005769</td>
+      <td>0.02423</td>
+      <td>0.03950</td>
+      <td>0.01678</td>
+      <td>0.01898</td>
+      <td>0.002498</td>
+      <td>23.690</td>
+      <td>38.25</td>
+      <td>0.11660</td>
+      <td>0.19220</td>
+      <td>0.3215</td>
+      <td>0.1628</td>
+      <td>0.2572</td>
+      <td>0.06637</td>
+    </tr>
+    <tr>
+      <th>566</th>
+      <td>28.08</td>
+      <td>858.1</td>
+      <td>0.08455</td>
+      <td>0.10230</td>
+      <td>0.05302</td>
+      <td>0.1590</td>
+      <td>0.05648</td>
+      <td>0.4564</td>
+      <td>1.0750</td>
+      <td>48.55</td>
+      <td>0.005903</td>
+      <td>0.03731</td>
+      <td>0.04730</td>
+      <td>0.01557</td>
+      <td>0.01318</td>
+      <td>0.003892</td>
+      <td>18.980</td>
+      <td>34.12</td>
+      <td>0.11390</td>
+      <td>0.30940</td>
+      <td>0.3403</td>
+      <td>0.1418</td>
+      <td>0.2218</td>
+      <td>0.07820</td>
+    </tr>
+    <tr>
+      <th>567</th>
+      <td>29.33</td>
+      <td>1265.0</td>
+      <td>0.11780</td>
+      <td>0.27700</td>
+      <td>0.15200</td>
+      <td>0.2397</td>
+      <td>0.07016</td>
+      <td>0.7260</td>
+      <td>1.5950</td>
+      <td>86.22</td>
+      <td>0.006522</td>
+      <td>0.06158</td>
+      <td>0.07117</td>
+      <td>0.01664</td>
+      <td>0.02324</td>
+      <td>0.006185</td>
+      <td>25.740</td>
+      <td>39.42</td>
+      <td>0.16500</td>
+      <td>0.86810</td>
+      <td>0.9387</td>
+      <td>0.2650</td>
+      <td>0.4087</td>
+      <td>0.12400</td>
+    </tr>
+    <tr>
+      <th>568</th>
+      <td>24.54</td>
+      <td>181.0</td>
+      <td>0.05263</td>
+      <td>0.04362</td>
+      <td>0.00000</td>
+      <td>0.1587</td>
+      <td>0.05884</td>
+      <td>0.3857</td>
+      <td>1.4280</td>
+      <td>19.15</td>
+      <td>0.007189</td>
+      <td>0.00466</td>
+      <td>0.00000</td>
+      <td>0.00000</td>
+      <td>0.02676</td>
+      <td>0.002783</td>
+      <td>9.456</td>
+      <td>30.37</td>
+      <td>0.08996</td>
+      <td>0.06444</td>
+      <td>0.0000</td>
+      <td>0.0000</td>
+      <td>0.2871</td>
+      <td>0.07039</td>
+    </tr>
+  </tbody>
+</table>
+<p>569 rows &#215; 24 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[80]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">corr</span><span class="p">());</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedImage jp-OutputArea-output">
+<img src="javascript://"/>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[82]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">B</span><span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">diagnosis</span>
+<span class="n">B</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[82]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult">
+<pre>0    M
+1    M
+2    M
+3    M
+4    M
+Name: diagnosis, dtype: object</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[83]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">#splitting into training and testing set</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">55</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[86]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># importing decesion tree</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="n">treeclf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">criterion</span><span class="o">=</span><span class="s1">&#39;entropy&#39;</span><span class="p">,</span> <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[88]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">treeclf</span> <span class="o">=</span> <span class="n">treeclf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[89]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">predTrain</span> <span class="o">=</span> <span class="n">treeclf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[90]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">predTest</span> <span class="o">=</span> <span class="n">treeclf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[92]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy of Training:&quot;</span><span class="p">,</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">predTrain</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output">
+<pre>Accuracy of Training: 0.9974874371859297
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[93]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy of Testing:&quot;</span><span class="p">,</span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predTest</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output">
+<pre>Accuracy of Testing: 0.9532163742690059
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&#160;[94]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor">
+     <div class="CodeMirror cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">predTest</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output">
+<pre>              precision    recall  f1-score   support
+
+           B       0.98      0.94      0.96       102
+           M       0.92      0.97      0.94        69
+
+    accuracy                           0.95       171
+   macro avg       0.95      0.96      0.95       171
+weighted avg       0.95      0.95      0.95       171
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput">
+<p>From removing the correlated features and using the decesion tree, we can see that the accuracy has been increased by 1%.</p>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<script type="module" src="https://s.brightspace.com/lib/bsi/20.23.8-201/unbundled/mathjax.js"></script><script type="text/javascript">document.addEventListener('DOMContentLoaded', function() {
+					if (document.querySelector('math') || /\$\$|\\\(|\\\[|\\begin{|\\ref{|\\eqref{/.test(document.body.innerHTML)) {
+						document.querySelectorAll('mspace[linebreak="newline"]').forEach(elm => {
+							elm.setAttribute('style', 'display: block; height: 0.5rem;');
+						});
+
+						window.D2L.MathJax.loadMathJax({
+							'outputScale': 1.5,
+							'renderLatex': false
+						});
+					}
+				});</script><script type="module" src="https://s.brightspace.com/lib/bsi/20.23.8-201/unbundled/prism.js"></script><script type="text/javascript">document.addEventListener('DOMContentLoaded', function() {
+					document.querySelectorAll('.d2l-code').forEach(code => {
+						window.D2L.Prism.formatCodeElement(code);
+					});
+				});</script></body></html>
